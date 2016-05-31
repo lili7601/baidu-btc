@@ -99,7 +99,7 @@ class AdminController extends \Think\Controller
 		$access = $this->accessControl();
 
 		if ($access === false) {
-			$this->error('403:禁止访问');
+			$this->error('403:Disable access ');
 		}
 		else if ($access === null) {
 			$dynamic = $this->checkDynamic();
@@ -108,11 +108,11 @@ class AdminController extends \Think\Controller
 				$rule = strtolower(MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME);
 
 				if (!$this->checkRule($rule, array('in', '1,2'))) {
-					$this->error('未授权访问!');
+					$this->error('Unauthorized access !');
 				}
 			}
 			else if ($dynamic === false) {
-				$this->error('未授权访问!');
+				$this->error('Unauthorized access !');
 			}
 		}
 
@@ -145,7 +145,7 @@ class AdminController extends \Think\Controller
 		$where = array_merge(array(
 	'id' => array('in', $id)
 	), (array) $where);
-		$msg = array_merge(array('success' => '操作成功！', 'error' => '操作失败！', 'url' => '', 'ajax' => IS_AJAX), (array) $msg);
+		$msg = array_merge(array('success' => 'Successful operation！', 'error' => 'operation failed ！', 'url' => '', 'ajax' => IS_AJAX), (array) $msg);
 
 		if (M($model)->where($where)->save($data) !== false) {
 			$this->success($msg['success'], $msg['url'], $msg['ajax']);
@@ -155,26 +155,26 @@ class AdminController extends \Think\Controller
 		}
 	}
 
-	protected function forbid($model, $where = array(), $msg = array('success' => '状态禁用成功！', 'error' => '状态禁用失败！'))
+	protected function forbid($model, $where = array(), $msg = array('success' => 'Status disable success ！', 'error' => 'Status disable failed ！'))
 	{
 		$data = array('status' => 0);
 		$this->editRow($model, $data, $where, $msg);
 	}
 
-	protected function resume($model, $where = array(), $msg = array('success' => '状态恢复成功！', 'error' => '状态恢复失败！'))
-	{
+	protected function resume($model, $where = array(), $msg = array('success' => 'State recovery success ！', 'error' => ' State recovery failed  ！'))
+	{Failed
 		$data = array('status' => 1);
 		$this->editRow($model, $data, $where, $msg);
 	}
 
-	protected function restore($model, $where = array(), $msg = array('success' => '状态还原成功！', 'error' => '状态还原失败！'))
+	protected function restore($model, $where = array(), $msg = array('success' => 'State restore success！', 'error' => 'State restore failed！'))
 	{
 		$data = array('status' => 1);
 		$where = array_merge(array('status' => -1), $where);
 		$this->editRow($model, $data, $where, $msg);
 	}
 
-	protected function delete($model, $where = array(), $msg = array('success' => '删除成功！', 'error' => '删除失败！'))
+	protected function delete($model, $where = array(), $msg = array('success' => 'Delete success ！', 'error' => 'Delete failed ！'))
 	{
 		$data['status'] = -1;
 		$data['update_time'] = NOW_TIME;
@@ -187,26 +187,26 @@ class AdminController extends \Think\Controller
 		$status = I('request.status');
 
 		if (empty($ids)) {
-			$this->error('请选择要操作的数据');
+			$this->error('Please select the data you want to operate ');
 		}
 
 		$map['id'] = array('in', $ids);
 
 		switch ($status) {
 		case -1:
-			$this->delete($Model, $map, array('success' => '删除成功', 'error' => '删除失败'));
+			$this->delete($Model, $map, array('success' => 'Delete success ', 'error' => 'Delete failed '));
 			break;
 
 		case 0:
-			$this->forbid($Model, $map, array('success' => '禁用成功', 'error' => '禁用失败'));
+			$this->forbid($Model, $map, array('success' => 'Disable success ', 'error' => 'Disable failed '));
 			break;
 
 		case 1:
-			$this->resume($Model, $map, array('success' => '启用成功', 'error' => '启用失败'));
+			$this->resume($Model, $map, array('success' => 'Enable success ', 'error' => 'Enable failed '));
 			break;
 
 		default:
-			$this->error('参数错误');
+			$this->error('Parameter error ');
 			break;
 		}
 	}
@@ -260,7 +260,7 @@ class AdminController extends \Think\Controller
 
 				foreach ($menus['main'] as $key => $item) {
 					if (!is_array($item) || empty($item['title']) || empty($item['url'])) {
-						$this->error('控制器基类$menus属性元素配置有误');
+						$this->error('Controller base class $menus attribute element configuration error ');
 					}
 
 					if (stripos($item['url'], MODULE_NAME) !== 0) {
