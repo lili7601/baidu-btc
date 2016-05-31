@@ -41,29 +41,29 @@ class AdminUserController extends AdminController
 	{
 		if (IS_POST) {
 			if (APP_DEMO) {
-				$this->error('测试站暂时不能修改！');
+				$this->error('Test station temporarily unable to modify ！');
 			}
 
 			$input = I('post.');
 
 			if (!check($input['username'], 'username')) {
-				$this->error('用户名格式错误！');
+				$this->error('User name format error ！');
 			}
 
 			if (!check($input['nickname'], 'A')) {
-				$this->error('昵称格式错误！');
+				$this->error('Nickname format error! ');
 			}
 
 			if (!check($input['password'], 'password')) {
-				$this->error('登录密码格式错误！');
+				$this->error('Login password format error! ');
 			}
 
 			if (!check($input['moble'], 'moble')) {
-				$this->error('手机号码格式错误！');
+				$this->error('Mobile phone number format error ');
 			}
 
 			if (!check($input['email'], 'email')) {
-				$this->error('邮箱格式错误！');
+				$this->error('Email format error ');
 			}
 
 			$input['status'] = 1;
@@ -71,10 +71,10 @@ class AdminUserController extends AdminController
 			$input['updatetime'] = time();
 
 			if (M('Admin')->add($input)) {
-				$this->success('添加成功！', U('AdminUser/index'));
+				$this->success('Add success! ', U('AdminUser/index'));
 			}
 			else {
-				$this->error('添加失败！');
+				$this->error('Add failed! ');
 			}
 		}
 		else {
@@ -98,7 +98,7 @@ class AdminUserController extends AdminController
 	{
 		if (IS_POST) {
 			if (APP_DEMO) {
-				$this->error('测试站暂时不能修改！');
+				$this->error('Test station temporarily unable to modify! ');
 			}
 
 			$input = I('post.');
@@ -114,10 +114,10 @@ class AdminUserController extends AdminController
 			$input['updatetime'] = time();
 
 			if (M('Admin')->save($input)) {
-				$this->success('编辑成功！');
+				$this->success('Editor success ！');
 			}
 			else {
-				$this->error('编辑失败！');
+				$this->error('Editor failed ！');
 			}
 		}
 		else {
@@ -135,7 +135,7 @@ class AdminUserController extends AdminController
 	public function status()
 	{
 		if (APP_DEMO) {
-			$this->error('测试站暂时不能修改！');
+			$this->error('Test station temporarily unable to modify ！');
 		}
 
 		if (IS_POST) {
@@ -147,7 +147,7 @@ class AdminUserController extends AdminController
 		}
 
 		if (empty($id)) {
-			$this->error('请选择要操作的数据!');
+			$this->error('Please select the operation data !');
 		}
 
 		$where['id'] = array('in', $id);
@@ -164,23 +164,23 @@ class AdminUserController extends AdminController
 
 		case 'delete':
 			if (M('Admin')->where($where)->delete()) {
-				$this->success('操作成功！');
+				$this->success('Successful operation ！');
 			}
 			else {
-				$this->error('操作失败！');
+				$this->error('operation failed ！');
 			}
 
 			break;
 
 		default:
-			$this->error('参数非法');
+			$this->error('invalid parameter ');
 		}
 
 		if (M('Admin')->where($where)->save($data)) {
-			$this->success('操作成功！');
+			$this->success('Successful operation ！');
 		}
 		else {
-			$this->error('操作失败！');
+			$this->error('operation failed ！');
 		}
 	}
 }
