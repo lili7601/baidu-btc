@@ -99,7 +99,7 @@ class AdminController extends \Think\Controller
 		$access = $this->accessControl();
 
 		if ($access === false) {
-			$this->error('403:禁止访问');
+			$this->error('403:Disable access ');
 		}
 		else if ($access === null) {
 			$dynamic = $this->checkDynamic();
