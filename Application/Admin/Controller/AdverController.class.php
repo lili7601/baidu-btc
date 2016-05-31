@@ -10,7 +10,7 @@ class AdverController extends AdminController
 	{
 		parent::__construct();
 		$this->Model = M('Adver');
-		$this->Title = '幻灯片';
+		$this->Title = 'slide ';
 	}
 
 	public function index($name = NULL)
@@ -43,7 +43,7 @@ class AdverController extends AdminController
 	public function save()
 	{
 		if (APP_DEMO) {
-			$this->error('测试站暂时不能修改！');
+			$this->error('Test station temporarily unable to modify ！');
 		}
 
 		$upload = new \Think\Upload();
@@ -68,17 +68,17 @@ class AdverController extends AdminController
 		}
 
 		if ($rs) {
-			$this->success('编辑成功！');
+			$this->success('Editor success ！');
 		}
 		else {
-			$this->error('编辑失败！');
+			$this->error('Editor failed ！');
 		}
 	}
 
 	public function status()
 	{
 		if (APP_DEMO) {
-			$this->error('测试站暂时不能修改！');
+			$this->error('Test station temporarily unable to modify ！');
 		}
 
 		if (IS_POST) {
@@ -90,7 +90,7 @@ class AdverController extends AdminController
 		}
 
 		if (empty($id)) {
-			$this->error('请选择要操作的数据!');
+			$this->error('Please select the operation data !');
 		}
 
 		$where['id'] = array('in', $id);
@@ -107,23 +107,23 @@ class AdverController extends AdminController
 
 		case 'delete':
 			if ($this->Model->where($where)->delete()) {
-				$this->success('操作成功！');
+				$this->success('Successful operation ！');
 			}
 			else {
-				$this->error('操作失败！');
+				$this->error('operation failed ！');
 			}
 
 			break;
 
 		default:
-			$this->error('参数非法');
+			$this->error('invalid parameter ');
 		}
 
 		if ($this->Model->where($where)->save($data)) {
-			$this->success('操作成功！');
+			$this->success('Successful operation ！');
 		}
 		else {
-			$this->error('操作失败！');
+			$this->error('operation failed ！');
 		}
 	}
 }
